@@ -36,17 +36,20 @@ contract('EthSwap', ([deployer, investor]) => {
     });
   });
 
-  describe('buyTokens()', async () =>{
-let result
-      before(async () => {
-        token = await Token.new();
-        ethSwap = await EthSwap.new(token.address);
+  describe('buyTokens()', async () => {
+    let result;
+    before(async () => {
+      token = await Token.new();
+      ethSwap = await EthSwap.new(token.address);
 
-        // Trnasfer all tokens to EthSwap
-        await token.transfer(ethSwap.address, '1000000000000000000');
+      // Trnasfer all tokens to EthSwap
+      await token.transfer(ethSwap.address, '1000000000000000000');
+    });
+    it('Allows user to instantly purchase tokens from ethSwap for a fixed price', async () => {
+      ethSwap.buyTokens({
+        from: investor,
+        value: web3.utils.toWei('1', 'ether')
+      });
+    });
   });
-      it('Allows user to instantly purchase tokens from ethSwap for a fixed price', async () => {
-          ethSwap.buyTokens({from: investor,  value: web3.utils.toWei('1', 'ether')})
-      })
-  })
 });

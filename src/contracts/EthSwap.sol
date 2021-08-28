@@ -5,7 +5,7 @@ import "./Token.sol";
 contract EthSwap {
     string public name = "EthSwap Instant Exchange";
     Token public token;
-    uint public rate = 100;
+    uint256 public rate = 100;
 
     constructor(Token _token) public {
         token = _token;
@@ -15,7 +15,7 @@ contract EthSwap {
         // Calculate the number of tokens to buy
         // Redemption rate = # of tokens they receive for 1 ether
         // AMount of Ethereum * Redemption rate
-        uint tokenAmount = msg.value * rate;
+        uint256 tokenAmount = msg.value * rate;
         token.transfer(msg.sender, tokenAmount);
     }
 }
